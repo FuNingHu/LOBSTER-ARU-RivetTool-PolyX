@@ -1,45 +1,45 @@
 @if (contributedNode) {
     <div class="inline-component">
-        <span>Rivet Supply: </span>
+        <span>{{ 'program.nodes.aru-pg-rivet-supply.title' | translate }} </span>
             <ur-dialog-number-input
                 [clearable]="true"
                 [disabled]="false"
-                label="Time to check"
+                [label]="'program.nodes.aru-pg-rivet-supply.timeToCheck' | translate"
                 keyboardLayout="numeric-free-positive"
                 [max]="10"
                 [min]="0"
                 [step]="0.1"
                 [placeholder]= "this.contributedNode.parameters.time2Check.toString()"
                 [required]="false"
-                [suffix]="'sec'"
+                [suffix]="'program.nodes.aru-pg-rivet-supply.unit' | translate"
                 (valueChanged)="this.contributedNode.parameters.time2Check = $event; saveNode()"
                 [value]="this.contributedNode.parameters.time2Check"
             ></ur-dialog-number-input>
             <ur-dialog-number-input
                 [clearable]="true"
                 [disabled]="false"
-                label="Time to open"
+                [label]="'program.nodes.aru-pg-rivet-supply.timeToOpen' | translate"
                 keyboardLayout="numeric-free-positive"
                 [max]="10"
                 [min]="0"
                 [step]="0.1"
                 [placeholder]= "this.contributedNode.parameters.time2Open.toString()"
                 [required]="false"
-                [suffix]="'sec'"
+                [suffix]="'program.nodes.aru-pg-rivet-supply.unit' | translate"
                 (valueChanged)="this.contributedNode.parameters.time2Open = $event; saveNode()"
                 [value]="this.contributedNode.parameters.time2Open"
             ></ur-dialog-number-input>
             <ur-dialog-number-input
                 [clearable]="true"
                 [disabled]="false"
-                label="Time to stop"
+                [label]="'program.nodes.aru-pg-rivet-supply.timeToStop' | translate"
                 keyboardLayout="numeric-free-positive"
                 [max]="10"
                 [min]="0"
                 [step]="0.1"
                 [placeholder]= "this.contributedNode.parameters.time2Stop.toString()"
                 [required]="false"
-                [suffix]="'sec'"
+                [suffix]="'program.nodes.aru-pg-rivet-supply.unit' | translate"
                 (valueChanged)="this.contributedNode.parameters.time2Stop = $event; saveNode()"
                 [value]="this.contributedNode.parameters.time2Stop"
             ></ur-dialog-number-input>

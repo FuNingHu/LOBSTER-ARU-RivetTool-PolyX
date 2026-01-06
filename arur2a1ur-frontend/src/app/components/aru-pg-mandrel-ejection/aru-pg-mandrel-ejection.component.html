@@ -1,6 +1,6 @@
 @if (contributedNode) {
     <div class="inline-component">
-        <span>Mandrel Ejection: check time </span>
+        <span>{{ 'program.nodes.aru-pg-mandrel-ejection.label' | translate }} </span>
         <input type="range" 
             min="0" 
             max="10" 
@@ -8,6 +8,6 @@
             [(ngModel)]="this.check_time"
             (change)="afterLevelChange()"
             >
-        <span>{{ this.check_time }} sec</span>
+        <span>{{ this.check_time }} {{ 'program.nodes.aru-pg-mandrel-ejection.unit' | translate }}</span>
     </div>
 }

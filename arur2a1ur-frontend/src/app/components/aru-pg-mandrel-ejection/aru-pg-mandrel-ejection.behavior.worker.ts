@@ -6,13 +6,23 @@ import {
     ProgramNode,
     registerProgramBehavior,
     ScriptBuilder,
+    TranslatedProgramLabelPart,
     ValidationContext,
     ValidationResponse
 } from '@universal-robots/contribution-api';
 import { AruPgMandrelEjectionNode } from './aru-pg-mandrel-ejection.node';
 
 // programNodeLabel is required
-const createProgramNodeLabel = (node: AruPgMandrelEjectionNode): OptionalPromise<string> => `Check if mandrel is ejected after ${node.parameters.check_time} sec`;
+const createProgramNodeLabel = (node: AruPgMandrelEjectionNode): OptionalPromise<TranslatedProgramLabelPart[]> => {
+    const extensionPart: TranslatedProgramLabelPart = {
+        type: 'secondary',
+        translationKey: 'program.nodes.aru-pg-mandrel-ejection.programLabel',
+        interpolateParams: {
+            checkTime: node.parameters.check_time.toString()
+        },
+    };
+    return [extensionPart];
+};
 
 // factory is required
 const createProgramNode = (): OptionalPromise<AruPgMandrelEjectionNode> => ({

@@ -6,13 +6,23 @@ import {
     ProgramNode,
     registerProgramBehavior,
     ScriptBuilder,
+    TranslatedProgramLabelPart,
     ValidationContext,
     ValidationResponse
 } from '@universal-robots/contribution-api';
 import { AruPgRivetingStartNode } from './aru-pg-riveting-start.node';
 
 // programNodeLabel is required
-const createProgramNodeLabel = (node: AruPgRivetingStartNode): OptionalPromise<string> => `switch on ${node.parameters.duration} sec`;
+const createProgramNodeLabel = (node: AruPgRivetingStartNode): OptionalPromise<TranslatedProgramLabelPart[]> => {
+    const extensionPart: TranslatedProgramLabelPart = {
+        type: 'secondary',
+        translationKey: 'program.nodes.aru-pg-riveting-start.programLabel',
+        interpolateParams: {
+            duration: node.parameters.duration.toString()
+        },
+    };
+    return [extensionPart];
+};
 
 // factory is required
 const createProgramNode = (): OptionalPromise<AruPgRivetingStartNode> => ({

@@ -11,11 +11,41 @@
     "tree": {
       "nodes": {
         "lobtex-arur2a1ur-aru-pg-reset": "ARU Reset",
-        "lobtex-arur2a1ur-aru-pg-finish": "ARU Finish",
-        "lobtex-arur2a1ur-aru-pg-riveting-start": "ARU Riveting Start",
-        "lobtex-arur2a1ur-aru-pg-mandrel-ejection": "ARU Mandrel Ejection",
-        "lobtex-arur2a1ur-aru-pg-rivet-supply": "ARU Rivet Supply",
-        "lobtex-arur2a1ur-aru-pg-check": "ARU Check"
+        "lobtex-arur2a1ur-aru-pg-finish": "Riveting Finish",
+        "lobtex-arur2a1ur-aru-pg-riveting-start": "Riveting Start",
+        "lobtex-arur2a1ur-aru-pg-mandrel-ejection": "Mandrel Ejection",
+        "lobtex-arur2a1ur-aru-pg-rivet-supply": "Rivet Supply",
+        "lobtex-arur2a1ur-aru-pg-check": "Rivet Check"
+      }
+    },
+    "nodes": {
+      "aru-pg-reset": {
+        "description": "Reset the ARU output to its initial (OFF) state. DO[0], DO[1], DO[7] are OFF. TO[0] is OFF."
+      },
+      "aru-pg-finish": {
+        "description": "Finish the riveting operation. TO[0] is OFF."
+      },
+      "aru-pg-riveting-start": {
+        "label": "Riveting Start: TO[0] switch on duration",
+        "unit": "sec",
+        "programLabel": "switch on {{duration}} sec"
+      },
+      "aru-pg-mandrel-ejection": {
+        "label": "Mandrel Ejection: check time",
+        "unit": "sec",
+        "programLabel": "Check if mandrel is ejected after {{checkTime}} sec"
+      },
+      "aru-pg-rivet-supply": {
+        "title": "Rivet Supply:",
+        "timeToCheck": "Time to check",
+        "timeToOpen": "Time to open",
+        "timeToStop": "Time to stop",
+        "unit": "sec",
+        "programLabel": "check time {{time2Check}} sec, open time {{time2Open}} sec, stop time {{time2Stop}} sec"
+      },
+      "aru-pg-check": {
+        "description": "Check a rivet by the optical sensor.",
+        "programLabel": "Check a rivet by the optical sensor"
       }
     }
   },

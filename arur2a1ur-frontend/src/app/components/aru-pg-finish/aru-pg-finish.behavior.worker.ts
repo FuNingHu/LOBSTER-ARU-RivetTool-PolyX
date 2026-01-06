@@ -12,7 +12,7 @@ import {
 import { AruPgFinishNode } from './aru-pg-finish.node';
 
 // programNodeLabel is required
-const createProgramNodeLabel = (node: AruPgFinishNode): OptionalPromise<string> => 'ARU Finish';
+const createProgramNodeLabel = (node: AruPgFinishNode): OptionalPromise<string> => '';
 
 // factory is required
 const createProgramNode = (): OptionalPromise<AruPgFinishNode> => ({

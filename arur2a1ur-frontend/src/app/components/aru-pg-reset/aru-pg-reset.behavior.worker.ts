@@ -6,13 +6,20 @@ import {
     ProgramNode,
     registerProgramBehavior,
     ScriptBuilder,
+    TranslatedProgramLabelPart,
     ValidationContext,
     ValidationResponse
 } from '@universal-robots/contribution-api';
 import { AruPgResetNode } from './aru-pg-reset.node';
 
 // programNodeLabel is required
-const createProgramNodeLabel = (node: AruPgResetNode): OptionalPromise<string> => 'Reset the ARU output to its initial (OFF) state';
+const createProgramNodeLabel = (node: AruPgResetNode): OptionalPromise<TranslatedProgramLabelPart[]> => {
+    const extensionPart: TranslatedProgramLabelPart = {
+        type: 'secondary',
+        translationKey: 'program.nodes.aru-pg-reset.description',
+    };
+    return [extensionPart];
+};
 
 // factory is required
 const createProgramNode = (): OptionalPromise<AruPgResetNode> => ({

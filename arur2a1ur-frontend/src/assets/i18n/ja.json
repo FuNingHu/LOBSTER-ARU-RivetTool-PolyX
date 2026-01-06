@@ -1,0 +1,55 @@
+{
+  "application": {
+    "nodes": {
+      "lobtex-arur2a1ur-aru-app": {
+        "title": "ARUアプリケーション",
+        "supportiveText": "URCap紹介"
+      }
+    }
+  },
+  "program": {
+    "tree": {
+      "nodes": {
+        "lobtex-arur2a1ur-aru-pg-reset": "ARUリセット",
+        "lobtex-arur2a1ur-aru-pg-finish": "リベット完了",
+        "lobtex-arur2a1ur-aru-pg-riveting-start": "リベット開始",
+        "lobtex-arur2a1ur-aru-pg-mandrel-ejection": "マンドレル排出",
+        "lobtex-arur2a1ur-aru-pg-rivet-supply": "リベット供給",
+        "lobtex-arur2a1ur-aru-pg-check": "リベットチェック"
+      }
+    },
+    "nodes": {
+      "aru-pg-reset": {
+        "description": "ARU出力を初期(OFF)状態にリセットします。DO[0]、DO[1]、DO[7]はOFFです。TO[0]はOFFです。"
+      },
+      "aru-pg-finish": {
+        "description": "リベット作業を完了します。TO[0]はOFFです。"
+      },
+      "aru-pg-riveting-start": {
+        "label": "リベット開始: TO[0]スイッチオン時間",
+        "unit": "秒",
+        "programLabel": "スイッチオン {{duration}} 秒"
+      },
+      "aru-pg-mandrel-ejection": {
+        "label": "マンドレル排出: チェック時間",
+        "unit": "秒",
+        "programLabel": "マンドレル排出後 {{checkTime}} 秒でチェック"
+      },
+      "aru-pg-rivet-supply": {
+        "title": "リベット供給:",
+        "timeToCheck": "チェック時間",
+        "timeToOpen": "開く時間",
+        "timeToStop": "停止時間",
+        "unit": "秒",
+        "programLabel": "チェック時間 {{time2Check}} 秒、開く時間 {{time2Open}} 秒、停止時間 {{time2Stop}} 秒"
+      },
+      "aru-pg-check": {
+        "description": "光学センサーでリベットをチェックします。",
+        "programLabel": "光学センサーでリベットをチェック"
+      }
+    }
+  },
+  "smart-skills": {},
+  "sidebar-items": {}
+}
+

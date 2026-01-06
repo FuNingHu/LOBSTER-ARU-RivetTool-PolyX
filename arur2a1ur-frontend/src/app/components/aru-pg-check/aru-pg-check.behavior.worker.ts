@@ -7,13 +7,20 @@ import {
     ProgramNode,
     registerProgramBehavior,
     ScriptBuilder,
+    TranslatedProgramLabelPart,
     ValidationContext,
     ValidationResponse
 } from '@universal-robots/contribution-api';
 import { AruPgCheckNode } from './aru-pg-check.node';
 
 // programNodeLabel is required
-const createProgramNodeLabel = (node: AruPgCheckNode): OptionalPromise<string> => 'Check a rivet by the optical sensor.';
+const createProgramNodeLabel = (node: AruPgCheckNode): OptionalPromise<TranslatedProgramLabelPart[]> => {
+    const extensionPart: TranslatedProgramLabelPart = {
+        type: 'secondary',
+        translationKey: 'program.nodes.aru-pg-check.programLabel',
+    };
+    return [extensionPart];
+};
 
 // factory is required
 const createProgramNode = (): OptionalPromise<AruPgCheckNode> => ({

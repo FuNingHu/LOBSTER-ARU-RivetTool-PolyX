@@ -1,6 +1,6 @@
 @if (contributedNode) {
     <div class="inline-component">
-        <span>Riverting Start: TO[0] switch on duration </span>
+        <span>{{ 'program.nodes.aru-pg-riveting-start.label' | translate }} </span>
         <input type="range" 
             min="0" 
             max="10" 
@@ -8,6 +8,6 @@
             [(ngModel)]="this.duration"
             (change)="afterLevelChange()"
             >
-        <span>{{ this.duration }} sec</span>
+        <span>{{ this.duration }} {{ 'program.nodes.aru-pg-riveting-start.unit' | translate }}</span>
     </div>
 }

@@ -6,13 +6,25 @@ import {
     ProgramNode,
     registerProgramBehavior,
     ScriptBuilder,
+    TranslatedProgramLabelPart,
     ValidationContext,
     ValidationResponse
 } from '@universal-robots/contribution-api';
 import { AruPgRivetSupplyNode } from './aru-pg-rivet-supply.node';
 
 // programNodeLabel is required
-const createProgramNodeLabel = (node: AruPgRivetSupplyNode): OptionalPromise<string> => `check time ${node.parameters.time2Check} sec, open time ${node.parameters.time2Open} sec, stop time ${node.parameters.time2Stop} sec`;
+const createProgramNodeLabel = (node: AruPgRivetSupplyNode): OptionalPromise<TranslatedProgramLabelPart[]> => {
+    const extensionPart: TranslatedProgramLabelPart = {
+        type: 'secondary',
+        translationKey: 'program.nodes.aru-pg-rivet-supply.programLabel',
+        interpolateParams: {
+            time2Check: node.parameters.time2Check.toString(),
+            time2Open: node.parameters.time2Open.toString(),
+            time2Stop: node.parameters.time2Stop.toString()
+        },
+    };
+    return [extensionPart];
+};
 
 // factory is required
 const createProgramNode = (): OptionalPromise<AruPgRivetSupplyNode> => ({
