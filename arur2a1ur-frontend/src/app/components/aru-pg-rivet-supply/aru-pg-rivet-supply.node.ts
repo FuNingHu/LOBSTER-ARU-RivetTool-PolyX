@@ -1,0 +1,12 @@
+import { ProgramNode } from '@universal-robots/contribution-api';
+
+export interface AruPgRivetSupplyNode extends ProgramNode {
+    type: string;
+    parameters: {
+        time2Check: number;
+        time2Open: number;
+        time2Stop: number;
+    };
+    lockChildren?: boolean;
+    allowsChildren?: boolean;
+}

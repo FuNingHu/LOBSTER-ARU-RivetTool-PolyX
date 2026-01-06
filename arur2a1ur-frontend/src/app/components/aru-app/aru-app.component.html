@@ -1,0 +1,54 @@
+<div *ngIf="applicationNode" class="more-settings-dialog-content">
+    <div class="section">
+        <nav>
+            <ur-tabs (linkChanged)="onLinkChanged($event)" [isVertical]="true">
+                <ur-tab title="ARU Reset" link="aru_reset" icon="undo"></ur-tab>
+                <ur-tab title="Riveting Finish" link="riveting_finish" icon="check"></ur-tab>
+                <ur-tab title="Riveting Start" link="riveting_start" icon="action"></ur-tab>
+                <ur-tab title="Mandrel Ejection" link="mandrel_ejection" icon="export"></ur-tab>
+                <ur-tab title="Rivet Supply" link="rivet_supply" icon="plus"></ur-tab>
+                <ur-tab title="Rivet Check" link="rivet_check" icon="check-circle"></ur-tab>
+            </ur-tabs>
+        </nav>
+        <hr class="vertical" />
+        
+        <!-- 右侧内容区域：根据选中的 tab 显示对应的组件 -->
+        <div class="tab-content">
+            <app-aru-app-reset *ngIf="selectedTab === 'aru_reset'" 
+                [applicationAPI]="applicationAPI"
+                [robotSettings]="robotSettings"
+                [applicationNode]="applicationNode">
+            </app-aru-app-reset>
+
+            <app-aru-app-finish *ngIf="selectedTab === 'riveting_finish'" 
+                [applicationAPI]="applicationAPI"
+                [robotSettings]="robotSettings"
+                [applicationNode]="applicationNode">
+            </app-aru-app-finish>
+
+            <app-aru-app-start *ngIf="selectedTab === 'riveting_start'" 
+                [applicationAPI]="applicationAPI"
+                [robotSettings]="robotSettings"
+                [applicationNode]="applicationNode">
+            </app-aru-app-start>
+
+            <app-aru-app-mandrel-ejection *ngIf="selectedTab === 'mandrel_ejection'" 
+                [applicationAPI]="applicationAPI"
+                [robotSettings]="robotSettings"
+                [applicationNode]="applicationNode">
+            </app-aru-app-mandrel-ejection>
+
+            <app-aru-app-supply *ngIf="selectedTab === 'rivet_supply'" 
+                [applicationAPI]="applicationAPI"
+                [robotSettings]="robotSettings"
+                [applicationNode]="applicationNode">
+            </app-aru-app-supply>
+
+            <app-aru-app-check *ngIf="selectedTab === 'rivet_check'" 
+                [applicationAPI]="applicationAPI"
+                [robotSettings]="robotSettings"
+                [applicationNode]="applicationNode">
+            </app-aru-app-check>
+        </div>
+    </div>
+</div>

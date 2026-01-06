@@ -1,0 +1,27 @@
+<!-- <p>aru-app-supply works!</p> -->
+<h1>Rivet Supply</h1>
+
+<section class="description">
+    <p>Pressurises a rivet from ARF-700 to the feed head unit.</p>
+    <p><strong>Note:</strong> Turn on the vacuum switch. Move to the supply point before this node.</p>
+</section>
+
+<section class="io-configuration">
+    <h3>I/O Port Configuration</h3>
+    <ul>
+        <li><strong>DO[0]:</strong> Rivet supply request output port</li>
+        <li><strong>DO[1]:</strong> Finger open/close operation output port (HIGH: finger close)</li>
+        <li><strong>DO[7]:</strong> Error output port</li>
+        <li><strong>DI[0]:</strong> Rivet pass sensor input port</li>
+    </ul>
+</section>
+
+<section class="parameters">
+    <h3>Adjustable Parameters</h3>
+    <p>There are 3 sliders for adjusting the following timing parameters:</p>
+    <ul>
+        <li>Time to check rivet supply</li>
+        <li>Time to open fingers</li>
+        <li>Time until air stops</li>
+    </ul>
+</section>

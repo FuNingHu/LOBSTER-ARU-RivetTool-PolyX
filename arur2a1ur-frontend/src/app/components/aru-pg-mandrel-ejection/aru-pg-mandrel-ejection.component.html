@@ -1,0 +1,13 @@
+@if (contributedNode) {
+    <div class="inline-component">
+        <span>Mandrel Ejection: check time </span>
+        <input type="range" 
+            min="0" 
+            max="10" 
+            step="0.1"
+            [(ngModel)]="this.check_time"
+            (change)="afterLevelChange()"
+            >
+        <span>{{ this.check_time }} sec</span>
+    </div>
+}

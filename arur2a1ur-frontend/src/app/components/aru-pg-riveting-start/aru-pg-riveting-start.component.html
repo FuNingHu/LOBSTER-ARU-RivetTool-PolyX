@@ -1,0 +1,13 @@
+@if (contributedNode) {
+    <div class="inline-component">
+        <span>Riverting Start: TO[0] switch on duration </span>
+        <input type="range" 
+            min="0" 
+            max="10" 
+            step="0.1"
+            [(ngModel)]="this.duration"
+            (change)="afterLevelChange()"
+            >
+        <span>{{ this.duration }} sec</span>
+    </div>
+}

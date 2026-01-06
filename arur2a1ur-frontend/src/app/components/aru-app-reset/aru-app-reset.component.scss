@@ -1,0 +1,28 @@
+h1 {
+    margin-bottom: var(--spacing-04);
+    color: var(--color-text-primary, #000);
+}
+
+p {
+    margin-bottom: var(--spacing-03);
+    line-height: 1.5;
+
+    &:last-child {
+        margin-bottom: 0;
+    }
+}
+
+ul {
+    margin: var(--spacing-03) 0;
+    padding-left: var(--spacing-05);
+    
+    li {
+        margin-bottom: var(--spacing-02);
+        line-height: 1.5;
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+}
+

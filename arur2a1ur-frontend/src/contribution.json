@@ -1,0 +1,66 @@
+
+{
+  "applicationNodes": [
+    {
+      "translationPath": "assets/i18n/",
+      "behaviorURI": "aru-app.worker.js",
+      "iconURI": "assets/icons/lobtex_logo.svg",
+      "presenterURI": "main.js",
+      "componentTagName": "lobtex-arur2a1ur-aru-app"
+    }
+  ],
+  "programNodes": [
+    {
+      "excludeFromToolbox": false,
+      "translationPath": "assets/i18n/",
+      "iconURI": "assets/icons/aru_reset.svg",
+      "behaviorURI": "aru-pg-reset.worker.js",
+      "presenterURI": "main.js",
+      "componentTagName": "lobtex-arur2a1ur-aru-pg-reset"
+    },
+    {
+      "excludeFromToolbox": false,
+      "translationPath": "assets/i18n/",
+      "iconURI": "assets/icons/riveting_finish.svg",
+      "behaviorURI": "aru-pg-finish.worker.js",
+      "presenterURI": "main.js",
+      "componentTagName": "lobtex-arur2a1ur-aru-pg-finish"
+    },
+    {
+      "excludeFromToolbox": false,
+      "translationPath": "assets/i18n/",
+      "iconURI": "assets/icons/riveting_start.svg",
+      "behaviorURI": "aru-pg-riveting-start.worker.js",
+      "presenterURI": "main.js",
+      "componentTagName": "lobtex-arur2a1ur-aru-pg-riveting-start"
+    },
+    {
+      "excludeFromToolbox": false,
+      "translationPath": "assets/i18n/",
+      "iconURI": "assets/icons/mandrel_ejection.svg",
+      "behaviorURI": "aru-pg-mandrel-ejection.worker.js",
+      "presenterURI": "main.js",
+      "componentTagName": "lobtex-arur2a1ur-aru-pg-mandrel-ejection"
+    },
+    {
+      "excludeFromToolbox": false,
+      "translationPath": "assets/i18n/",
+      "iconURI": "assets/icons/rivet_supply.svg",
+      "behaviorURI": "aru-pg-rivet-supply.worker.js",
+      "presenterURI": "main.js",
+      "componentTagName": "lobtex-arur2a1ur-aru-pg-rivet-supply"
+    },
+    {
+      "excludeFromToolbox": false,
+      "translationPath": "assets/i18n/",
+      "iconURI": "assets/icons/rivet_check.svg",
+      "behaviorURI": "aru-pg-check.worker.js",
+      "presenterURI": "main.js",
+      "componentTagName": "lobtex-arur2a1ur-aru-pg-check"
+    }],
+  "smartSkills": [
+    ],
+  "sidebarItems": [
+    ],
+  "operatorScreens": []
+}
