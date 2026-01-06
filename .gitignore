@@ -7,8 +7,8 @@ dist/
 **/dist/
 
 # URCap package files
-target/
-*.urcapx
+# target/
+# *.urcapx
 
 # IDE files
 .vscode/
