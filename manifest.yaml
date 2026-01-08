@@ -1,9 +1,9 @@
 metadata:
   vendorID: "lobtex"
-  urcapID: "arur2a1ur"
+  urcapID: "ar-ur-2a1-ur"
   vendorName: "Lobtex"
   urcapName: "ARU-R2A1-UR"
-  version: 1.0.0
+  version: 1.1.0
 artifacts:
   webArchives:
   - id: "arur2a1ur-frontend"
