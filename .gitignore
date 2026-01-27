@@ -1,42 +1,77 @@
-# Node modules
-node_modules/
-**/node_modules/
-
 # Build outputs
 dist/
 **/dist/
 
-# URCap package files
-# target/
-# *.urcapx
+# Note: target/ folder is intentionally NOT ignored
+# We want to keep the built .urcapx files for distribution
 
-# IDE files
+# Dependencies
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Frontend build artifacts
+arur2a1ur-frontend/dist/
+arur2a1ur-frontend/.angular/
+arur2a1ur-frontend/node_modules/
+
+# IDE and Editor files
 .vscode/
 .idea/
 *.swp
 *.swo
 *~
+.DS_Store
+*.iml
 
 # OS files
-.DS_Store
 Thumbs.db
+Desktop.ini
 
 # Logs
+logs/
 *.log
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
 
-# Environment files
+# Environment variables
 .env
 .env.local
 .env.*.local
 
+# Testing
+coverage/
+.nyc_output/
+*.lcov
+
 # Temporary files
+tmp/
+temp/
 *.tmp
+*.bak
+*.backup
 .cache/
 
-# Build artifacts
-*.tsbuildinfo
-.angular/
+# Debug files
+*.orig
+*.rej
 
+# Accidentally created files from build scripts
+mkdir
+ng
+npm
+rimraf
+docker
+transferring
+exporting
+naming
+writing
+CACHED
+validate-manifest
+generate-manifest-constants
+*@*.*.0
+[internal]
+=
+
+# Note: We keep these files/folders for GitHub:
+# - target/*.urcapx (distribution files)
+# - package-lock.json (dependency lock)

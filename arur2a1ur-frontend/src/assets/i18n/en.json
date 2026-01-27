@@ -3,7 +3,98 @@
     "nodes": {
       "lobtex-arur2a1ur-aru-app": {
         "title": "ARU Application",
-        "supportiveText": "URCap Introduction"
+        "supportiveText": "URCap Introduction",
+        "tabs": {
+          "reset": "ARU Reset",
+          "finish": "Riveting Finish",
+          "start": "Riveting Start",
+          "mandrel": "Mandrel Ejection",
+          "supply": "Rivet Supply",
+          "check": "Rivet Check"
+        },
+        "reset": {
+          "title": "ARU Reset",
+          "description": "Reset the ARU output to its initial (OFF) state.",
+          "io": {
+            "do": "Digital output port DO[0], DO[1], and DO[7] are OFF.",
+            "to0": "Tool digital output port TO[0] is OFF."
+          }
+        },
+        "finish": {
+          "title": "Riveting Finish",
+          "description": "Finish the riveting operation.",
+          "ioConfig": {
+            "title": "I/O Port Configuration",
+            "to0": "Tool digital output port is OFF"
+          }
+        },
+        "start": {
+          "title": "Riveting Start",
+          "description": "Start the riveting operation.",
+          "note": {
+            "label": "Note:",
+            "text": "You should eject a mandrel after the end of riveting."
+          },
+          "ioConfig": {
+            "title": "I/O Port Configuration",
+            "to0": "Tool digital output port is ON"
+          },
+          "parameters": {
+            "title": "Adjustable Parameters",
+            "description": "There is a slider to adjust the time for the riveting switch to be switched on."
+          }
+        },
+        "mandrel": {
+          "title": "Mandrel Ejection",
+          "description": "Finish the riveting operation, and check whether a mandrel ejected or not.",
+          "ioConfig": {
+            "title": "I/O Port Configuration",
+            "to0": "Tool digital output port is OFF",
+            "do7": "Error output port",
+            "di2": "Mandrel pass sensor input port"
+          },
+          "parameters": {
+            "title": "Adjustable Parameters",
+            "description": "There is a slider to adjust the checking time for mandrel ejection."
+          }
+        },
+        "supply": {
+          "title": "Rivet Supply",
+          "description": "Pressurises a rivet from ARF-700 to the feed head unit.",
+          "note": {
+            "label": "Note:",
+            "text": "Turn on the vacuum switch. Move to the supply point before this node."
+          },
+          "ioConfig": {
+            "title": "I/O Port Configuration",
+            "do0": "Rivet supply request output port",
+            "do1": "Finger open/close operation output port (HIGH: finger close)",
+            "do7": "Error output port",
+            "di0": "Rivet pass sensor input port"
+          },
+          "parameters": {
+            "title": "Adjustable Parameters",
+            "description": "There are 3 sliders for adjusting the following timing parameters:",
+            "items": {
+              "check": "Time to check rivet supply",
+              "open": "Time to open fingers",
+              "stop": "Time until air stops"
+            }
+          }
+        },
+        "check": {
+          "title": "Rivet Check",
+          "description": "Check a rivet by the optical sensor.",
+          "note": {
+            "label": "Note:",
+            "text": "Move to the check point before this node."
+          },
+          "ioConfig": {
+            "title": "I/O Port Configuration",
+            "di1": "Optical sensor input port",
+            "do7": "Error output port (if a rivet not set, this port is ON)"
+          }
+        }
       }
     }
   },

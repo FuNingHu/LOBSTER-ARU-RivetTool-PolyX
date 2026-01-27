@@ -2,12 +2,12 @@
     <div class="section">
         <nav>
             <ur-tabs (linkChanged)="onLinkChanged($event)" [isVertical]="true">
-                <ur-tab title="ARU Reset" link="aru_reset" icon="undo"></ur-tab>
-                <ur-tab title="Riveting Finish" link="riveting_finish" icon="check"></ur-tab>
-                <ur-tab title="Riveting Start" link="riveting_start" icon="action"></ur-tab>
-                <ur-tab title="Mandrel Ejection" link="mandrel_ejection" icon="export"></ur-tab>
-                <ur-tab title="Rivet Supply" link="rivet_supply" icon="plus"></ur-tab>
-                <ur-tab title="Rivet Check" link="rivet_check" icon="check-circle"></ur-tab>
+                <ur-tab [title]="'application.nodes.lobtex-arur2a1ur-aru-app.tabs.reset' | translate" link="aru_reset" icon="undo"></ur-tab>
+                <ur-tab [title]="'application.nodes.lobtex-arur2a1ur-aru-app.tabs.finish' | translate" link="riveting_finish" icon="check"></ur-tab>
+                <ur-tab [title]="'application.nodes.lobtex-arur2a1ur-aru-app.tabs.start' | translate" link="riveting_start" icon="action"></ur-tab>
+                <ur-tab [title]="'application.nodes.lobtex-arur2a1ur-aru-app.tabs.mandrel' | translate" link="mandrel_ejection" icon="export"></ur-tab>
+                <ur-tab [title]="'application.nodes.lobtex-arur2a1ur-aru-app.tabs.supply' | translate" link="rivet_supply" icon="plus"></ur-tab>
+                <ur-tab [title]="'application.nodes.lobtex-arur2a1ur-aru-app.tabs.check' | translate" link="rivet_check" icon="check-circle"></ur-tab>
             </ur-tabs>
         </nav>
         <hr class="vertical" />
