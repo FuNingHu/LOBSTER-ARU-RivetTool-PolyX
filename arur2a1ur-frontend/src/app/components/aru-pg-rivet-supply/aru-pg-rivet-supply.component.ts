@@ -1,8 +1,9 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnChanges, OnDestroy, SimpleChanges } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { ProgramPresenter, ProgramPresenterAPI, RobotSettings } from '@universal-robots/contribution-api';
 import { AruPgRivetSupplyNode } from './aru-pg-rivet-supply.node';
 import { first } from 'rxjs/operators';
+import { Subscription } from 'rxjs';
 
 @Component({
     templateUrl: './aru-pg-rivet-supply.component.html',
@@ -11,7 +12,7 @@ import { first } from 'rxjs/operators';
     standalone: false
 })
 
-export class AruPgRivetSupplyComponent implements OnChanges, ProgramPresenter {
+export class AruPgRivetSupplyComponent implements OnChanges, OnDestroy, ProgramPresenter {
     // presenterAPI is optional
     @Input() presenterAPI: ProgramPresenterAPI;
 
@@ -19,6 +20,12 @@ export class AruPgRivetSupplyComponent implements OnChanges, ProgramPresenter {
     @Input() robotSettings: RobotSettings;
     // contributedNode is optional
     @Input() contributedNode: AruPgRivetSupplyNode;
+
+    time2Check: number;
+    time2Open: number;
+    time2Stop: number;
+    
+    private languageSubscription: Subscription | undefined;
 
     constructor(
         protected readonly translateService: TranslateService,
@@ -37,6 +44,9 @@ export class AruPgRivetSupplyComponent implements OnChanges, ProgramPresenter {
                     this.translateService.use(changes?.robotSettings?.currentValue?.language);
                 }
                 this.translateService.setDefaultLang('en');
+                
+                // Subscribe to language changes to always keep node language updated
+                this.setupLanguageSubscription();
             }
 
             this.translateService
@@ -45,7 +55,63 @@ export class AruPgRivetSupplyComponent implements OnChanges, ProgramPresenter {
                 .subscribe(() => {
                     this.cd.detectChanges();
                 });
+            
+            // Save language to node parameters whenever it changes
+            this.updateNodeLanguage(changes?.robotSettings?.currentValue?.language);
         }
+
+        if (changes?.contributedNode) {
+            this.time2Check = this.contributedNode.parameters.time2Check;
+            this.time2Open = this.contributedNode.parameters.time2Open;
+            this.time2Stop = this.contributedNode.parameters.time2Stop;
+            // Initialize language if not set
+            if (!this.contributedNode.parameters.language && this.robotSettings?.language) {
+                this.updateNodeLanguage(this.robotSettings.language);
+            }
+        }
+    }
+    
+    private setupLanguageSubscription(): void {
+        // Unsubscribe from previous subscription if exists
+        if (this.languageSubscription) {
+            this.languageSubscription.unsubscribe();
+        }
+        
+        // Subscribe to language changes
+        this.languageSubscription = this.translateService.onLangChange.subscribe((event) => {
+            if (this.contributedNode && event.lang) {
+                this.updateNodeLanguage(event.lang);
+            }
+        });
+    }
+    
+    private updateNodeLanguage(language: string): void {
+        if (this.contributedNode && language && this.contributedNode.parameters.language !== language) {
+            this.contributedNode.parameters.language = language;
+            this.saveNode();
+        }
+    }
+    
+    ngOnDestroy(): void {
+        // Clean up subscription
+        if (this.languageSubscription) {
+            this.languageSubscription.unsubscribe();
+        }
+    }
+
+    afterTime2CheckChange() {
+        this.contributedNode.parameters.time2Check = this.time2Check;
+        this.saveNode();
+    }
+
+    afterTime2OpenChange() {
+        this.contributedNode.parameters.time2Open = this.time2Open;
+        this.saveNode();
+    }
+
+    afterTime2StopChange() {
+        this.contributedNode.parameters.time2Stop = this.time2Stop;
+        this.saveNode();
     }
 
     // call saveNode to save node parameters

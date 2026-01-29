@@ -1,47 +1,35 @@
 @if (contributedNode) {
     <div class="inline-component">
         <span>{{ 'program.nodes.aru-pg-rivet-supply.title' | translate }} </span>
-            <ur-dialog-number-input
-                [clearable]="true"
-                [disabled]="false"
-                [label]="'program.nodes.aru-pg-rivet-supply.timeToCheck' | translate"
-                keyboardLayout="numeric-free-positive"
-                [max]="10"
-                [min]="0"
-                [step]="0.1"
-                [placeholder]= "this.contributedNode.parameters.time2Check.toString()"
-                [required]="false"
-                [suffix]="'program.nodes.aru-pg-rivet-supply.unit' | translate"
-                (valueChanged)="this.contributedNode.parameters.time2Check = $event; saveNode()"
-                [value]="this.contributedNode.parameters.time2Check"
-            ></ur-dialog-number-input>
-            <ur-dialog-number-input
-                [clearable]="true"
-                [disabled]="false"
-                [label]="'program.nodes.aru-pg-rivet-supply.timeToOpen' | translate"
-                keyboardLayout="numeric-free-positive"
-                [max]="10"
-                [min]="0"
-                [step]="0.1"
-                [placeholder]= "this.contributedNode.parameters.time2Open.toString()"
-                [required]="false"
-                [suffix]="'program.nodes.aru-pg-rivet-supply.unit' | translate"
-                (valueChanged)="this.contributedNode.parameters.time2Open = $event; saveNode()"
-                [value]="this.contributedNode.parameters.time2Open"
-            ></ur-dialog-number-input>
-            <ur-dialog-number-input
-                [clearable]="true"
-                [disabled]="false"
-                [label]="'program.nodes.aru-pg-rivet-supply.timeToStop' | translate"
-                keyboardLayout="numeric-free-positive"
-                [max]="10"
-                [min]="0"
-                [step]="0.1"
-                [placeholder]= "this.contributedNode.parameters.time2Stop.toString()"
-                [required]="false"
-                [suffix]="'program.nodes.aru-pg-rivet-supply.unit' | translate"
-                (valueChanged)="this.contributedNode.parameters.time2Stop = $event; saveNode()"
-                [value]="this.contributedNode.parameters.time2Stop"
-            ></ur-dialog-number-input>
+            <span>{{ 'program.nodes.aru-pg-rivet-supply.timeToCheck' | translate }}: </span>
+            <input type="range" 
+                style="width: 150px;"
+                min="0" 
+                max="10" 
+                step="0.1"
+                [(ngModel)]="this.time2Check"
+                (change)="afterTime2CheckChange()"
+                >
+            <span style="display: inline-block; min-width: 60px;">{{ this.time2Check }} {{ 'program.nodes.aru-pg-rivet-supply.unit' | translate }}</span>
+            <span>{{ 'program.nodes.aru-pg-rivet-supply.timeToOpen' | translate }}: </span>
+            <input type="range" 
+                style="width: 150px;"
+                min="0" 
+                max="10" 
+                step="0.1"
+                [(ngModel)]="this.time2Open"
+                (change)="afterTime2OpenChange()"
+                >
+            <span style="display: inline-block; min-width: 60px;">{{ this.time2Open }} {{ 'program.nodes.aru-pg-rivet-supply.unit' | translate }}</span>
+            <span>{{ 'program.nodes.aru-pg-rivet-supply.timeToStop' | translate }}: </span>
+            <input type="range" 
+                style="width: 150px;"
+                min="0" 
+                max="10" 
+                step="0.1"
+                [(ngModel)]="this.time2Stop"
+                (change)="afterTime2StopChange()"
+                >
+            <span style="display: inline-block; min-width: 60px;">{{ this.time2Stop }} {{ 'program.nodes.aru-pg-rivet-supply.unit' | translate }}</span>
     </div>
 }

@@ -31,13 +31,21 @@ const createProgramNode = (): OptionalPromise<AruPgMandrelEjectionNode> => ({
     lockChildren: false,
     allowsChildren: false,
     parameters: {
-        check_time: 3
+        check_time: 3,
+        language: 'en'  // Default language
     },
 });
 
 // generateCodeBeforeChildren is optional
 const generateScriptCodeBefore = (node: AruPgMandrelEjectionNode): OptionalPromise<ScriptBuilder> => {
     const builder = new ScriptBuilder();
+    
+    // 根据 node.parameters.language 的值选择不同的 popup 消息
+    const isJapanese = node.parameters.language === 'ja';
+    const popupMessage = isJapanese 
+        ? 'popup("バキュームがONとなっているかご確認ください。",title="マンドレル排出エラー",error=True,blocking=True)'
+        : 'popup("Check that the vacuum is switched on.",title="Mandrel not ejected.",error=True,blocking=True)';
+    
     builder.addRaw(`eject_error_flag = 0
                     thread maouta084d066():
                         set_tool_digital_out(0,False)
@@ -50,7 +58,7 @@ const generateScriptCodeBefore = (node: AruPgMandrelEjectionNode): OptionalPromi
                     while (get_standard_digital_in(2) == False):
                         if (eject_error_flag == 1):
                             kill ma
-                            popup("Check that the vacuum is switched on.",title="Mandrel not ejected.",error=True,blocking=True)
+                            ${popupMessage}
                         end
                         sync()
                     end

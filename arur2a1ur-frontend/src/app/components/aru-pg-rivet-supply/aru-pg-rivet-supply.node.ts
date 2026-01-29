@@ -6,6 +6,7 @@ export interface AruPgRivetSupplyNode extends ProgramNode {
         time2Check: number;
         time2Open: number;
         time2Stop: number;
+        language: string;  // Add language parameter
     };
     lockChildren?: boolean;
     allowsChildren?: boolean;

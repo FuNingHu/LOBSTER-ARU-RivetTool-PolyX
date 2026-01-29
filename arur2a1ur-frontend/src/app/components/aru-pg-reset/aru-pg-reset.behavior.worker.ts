@@ -13,13 +13,16 @@ import {
 import { AruPgResetNode } from './aru-pg-reset.node';
 
 // programNodeLabel is required
-const createProgramNodeLabel = (node: AruPgResetNode): OptionalPromise<TranslatedProgramLabelPart[]> => {
-    const extensionPart: TranslatedProgramLabelPart = {
-        type: 'secondary',
-        translationKey: 'program.nodes.aru-pg-reset.description',
-    };
-    return [extensionPart];
-};
+const createProgramNodeLabel = (node: AruPgResetNode): OptionalPromise<string> => '';
+
+// backup of previous code
+// const createProgramNodeLabel = (node: AruPgResetNode): OptionalPromise<TranslatedProgramLabelPart[]> => {
+//     const extensionPart: TranslatedProgramLabelPart = {
+//         type: 'secondary',
+//         translationKey: 'program.nodes.aru-pg-reset.description',
+//     };
+//     return [extensionPart];
+// };
 
 // factory is required
 const createProgramNode = (): OptionalPromise<AruPgResetNode> => ({

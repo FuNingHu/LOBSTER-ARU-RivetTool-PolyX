@@ -13,14 +13,17 @@ import {
 } from '@universal-robots/contribution-api';
 import { AruPgCheckNode } from './aru-pg-check.node';
 
+const createProgramNodeLabel = (node: AruPgCheckNode): OptionalPromise<string> => '';
+
+// backup of previous code
 // programNodeLabel is required
-const createProgramNodeLabel = (node: AruPgCheckNode): OptionalPromise<TranslatedProgramLabelPart[]> => {
-    const extensionPart: TranslatedProgramLabelPart = {
-        type: 'secondary',
-        translationKey: 'program.nodes.aru-pg-check.programLabel',
-    };
-    return [extensionPart];
-};
+// const createProgramNodeLabel = (node: AruPgCheckNode): OptionalPromise<TranslatedProgramLabelPart[]> => {
+//     const extensionPart: TranslatedProgramLabelPart = {
+//         type: 'secondary',
+//         translationKey: 'program.nodes.aru-pg-check.programLabel',
+//     };
+//     return [extensionPart];
+// };
 
 // factory is required
 const createProgramNode = (): OptionalPromise<AruPgCheckNode> => ({
@@ -29,17 +32,29 @@ const createProgramNode = (): OptionalPromise<AruPgCheckNode> => ({
     lockChildren: false,
     allowsChildren: false,
     parameters: {
+        language: 'en'  // Default language
     },
 });
 
 // generateCodeBeforeChildren is optional
 const generateScriptCodeBefore = (node: AruPgCheckNode): OptionalPromise<ScriptBuilder> => {
     const builder = new ScriptBuilder();
+    
+    // 根据 node.parameters.language 的值选择不同的 popup 消息
+    const isJapanese = node.parameters.language === 'ja';
+    
     builder.addStatements('set_standard_digital_out(7,False)');
     builder.addStatements('set_standard_digital_out(1,True)');
     builder.ifCondition('get_standard_digital_in(1) == False');
     builder.addStatements('set_standard_digital_out(7,True)');
-    builder.popup('Check the vacuum is switched on.',"Rivet is not set", PopupLevel.ERROR, true);
+    
+    // 根据语言选择 popup 内容
+    if (isJapanese) {
+        builder.popup('バキュームがONとなっているかご確認ください。', 'リベットセットエラー', PopupLevel.ERROR, true);
+    } else {
+        builder.popup('Check the vacuum is switched on.', 'Rivet is not set', PopupLevel.ERROR, true);
+    }
+    
     builder.end();
     builder.addStatements('set_standard_digital_out(7,False)');
     return builder;

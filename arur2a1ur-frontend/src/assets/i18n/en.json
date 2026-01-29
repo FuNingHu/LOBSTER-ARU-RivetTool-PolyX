@@ -111,13 +111,13 @@
     },
     "nodes": {
       "aru-pg-reset": {
-        "description": "Reset the ARU output to its initial (OFF) state. DO[0], DO[1], DO[7] are OFF. TO[0] is OFF."
+        "description": "Reset the ARU output to its initial (OFF) state. DO[0], DO[1], DO[7] TO[0] are OFF."
       },
       "aru-pg-finish": {
         "description": "Finish the riveting operation. TO[0] is OFF."
       },
       "aru-pg-riveting-start": {
-        "label": "Riveting Start: TO[0] switch on duration",
+        "label": "Riveting Start: riveting operation time",
         "unit": "sec",
         "programLabel": "switch on {{duration}} sec"
       },

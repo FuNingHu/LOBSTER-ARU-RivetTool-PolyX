@@ -1,8 +1,9 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnChanges, OnDestroy, SimpleChanges } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { ProgramPresenter, ProgramPresenterAPI, RobotSettings } from '@universal-robots/contribution-api';
 import { AruPgCheckNode } from './aru-pg-check.node';
 import { first } from 'rxjs/operators';
+import { Subscription } from 'rxjs';
 
 @Component({
     templateUrl: './aru-pg-check.component.html',
@@ -11,7 +12,7 @@ import { first } from 'rxjs/operators';
     standalone: false
 })
 
-export class AruPgCheckComponent implements OnChanges, ProgramPresenter {
+export class AruPgCheckComponent implements OnChanges, OnDestroy, ProgramPresenter {
     // presenterAPI is optional
     @Input() presenterAPI: ProgramPresenterAPI;
 
@@ -19,6 +20,8 @@ export class AruPgCheckComponent implements OnChanges, ProgramPresenter {
     @Input() robotSettings: RobotSettings;
     // contributedNode is optional
     @Input() contributedNode: AruPgCheckNode;
+
+    private languageSubscription: Subscription | undefined;
 
     constructor(
         protected readonly translateService: TranslateService,
@@ -37,6 +40,9 @@ export class AruPgCheckComponent implements OnChanges, ProgramPresenter {
                     this.translateService.use(changes?.robotSettings?.currentValue?.language);
                 }
                 this.translateService.setDefaultLang('en');
+                
+                // Subscribe to language changes
+                this.setupLanguageSubscription();
             }
 
             this.translateService
@@ -45,6 +51,41 @@ export class AruPgCheckComponent implements OnChanges, ProgramPresenter {
                 .subscribe(() => {
                     this.cd.detectChanges();
                 });
+            
+            // Save language to node parameters
+            this.updateNodeLanguage(changes?.robotSettings?.currentValue?.language);
+        }
+        
+        if (changes?.contributedNode) {
+            // Initialize language if not set
+            if (!this.contributedNode.parameters.language && this.robotSettings?.language) {
+                this.updateNodeLanguage(this.robotSettings.language);
+            }
+        }
+    }
+    
+    private setupLanguageSubscription(): void {
+        if (this.languageSubscription) {
+            this.languageSubscription.unsubscribe();
+        }
+        
+        this.languageSubscription = this.translateService.onLangChange.subscribe((event) => {
+            if (this.contributedNode && event.lang) {
+                this.updateNodeLanguage(event.lang);
+            }
+        });
+    }
+    
+    private updateNodeLanguage(language: string): void {
+        if (this.contributedNode && language && this.contributedNode.parameters.language !== language) {
+            this.contributedNode.parameters.language = language;
+            this.saveNode();
+        }
+    }
+    
+    ngOnDestroy(): void {
+        if (this.languageSubscription) {
+            this.languageSubscription.unsubscribe();
         }
     }
 

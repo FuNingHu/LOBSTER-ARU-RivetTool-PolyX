@@ -10,7 +10,7 @@
           "start": "リベット開始",
           "mandrel": "マンドレル排出",
           "supply": "リベット供給",
-          "check": "リベットチェック"
+          "check": "リベット検知"
         },
         "reset": {
           "title": "ARUリセット",
@@ -83,7 +83,7 @@
           }
         },
         "check": {
-          "title": "リベットチェック",
+          "title": "リベット検知",
           "description": "光学センサーでリベットをチェックします。",
           "note": {
             "label": "注意:",
@@ -106,37 +106,37 @@
         "lobtex-arur2a1ur-aru-pg-riveting-start": "リベット開始",
         "lobtex-arur2a1ur-aru-pg-mandrel-ejection": "マンドレル排出",
         "lobtex-arur2a1ur-aru-pg-rivet-supply": "リベット供給",
-        "lobtex-arur2a1ur-aru-pg-check": "リベットチェック"
+        "lobtex-arur2a1ur-aru-pg-check": "リベット検知"
       }
     },
     "nodes": {
       "aru-pg-reset": {
-        "description": "ARU出力を初期(OFF)状態にリセットします。DO[0]、DO[1]、DO[7]はOFFです。TO[0]はOFFです。"
+        "description": "ARU出力を初期(OFF)状態にリセットします。DO[0]、DO[1]、 DO[7]、TO[0]をOFFにします。"
       },
       "aru-pg-finish": {
-        "description": "リベット作業を完了します。TO[0]はOFFです。"
+        "description": "かしめ作業を終了します。TO[0]をOFFにします。"
       },
       "aru-pg-riveting-start": {
-        "label": "リベット開始: TO[0]スイッチオン時間",
+        "label": "リベット開始: かしめ時間",
         "unit": "秒",
         "programLabel": "スイッチオン {{duration}} 秒"
       },
       "aru-pg-mandrel-ejection": {
-        "label": "マンドレル排出: チェック時間",
+        "label": "マンドレル排出: 排出チェック時間",
         "unit": "秒",
         "programLabel": "マンドレル排出後 {{checkTime}} 秒でチェック"
       },
       "aru-pg-rivet-supply": {
         "title": "リベット供給:",
-        "timeToCheck": "チェック時間",
-        "timeToOpen": "開く時間",
-        "timeToStop": "停止時間",
+        "timeToCheck": "通過判定最大時間",
+        "timeToOpen": "閉じ時間",
+        "timeToStop": "圧送停止遅延時間",
         "unit": "秒",
         "programLabel": "チェック時間 {{time2Check}} 秒、開く時間 {{time2Open}} 秒、停止時間 {{time2Stop}} 秒"
       },
       "aru-pg-check": {
-        "description": "光学センサーでリベットをチェックします。",
-        "programLabel": "光学センサーでリベットをチェック"
+        "description": "光電センサーでリベットをチェックします。",
+        "programLabel": "光電センサーでリベットをチェック"
       }
     }
   },

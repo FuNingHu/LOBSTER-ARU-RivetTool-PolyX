@@ -36,12 +36,20 @@ const createProgramNode = (): OptionalPromise<AruPgRivetSupplyNode> => ({
         time2Check: 3,
         time2Open: 0.2,
         time2Stop: 0.0,
+        language: 'en'  // Default language
     },
 });
 
 // generateCodeBeforeChildren is optional
 const generateScriptCodeBefore = (node: AruPgRivetSupplyNode): OptionalPromise<ScriptBuilder> => {
     const builder = new ScriptBuilder();
+    
+    // 根据 node.parameters.language 的值选择不同的 popup 消息
+    const isJapanese = node.parameters.language === 'ja';
+    const popupMessage = isJapanese 
+        ? 'popup("フィーダー及びフィードヘッドの動作を確認してください。",title="リベット供給エラー",error=True,blocking=True)'
+        : 'popup("Check feeder and feedhead.",title="Rivet not supplied.",error=True,blocking=True)';
+    
     builder.addRaw(`supply_error_flag7a8337ac = 0
                     thread airout7a8337ac():
                     set_standard_digital_out(0,True)
@@ -57,7 +65,7 @@ const generateScriptCodeBefore = (node: AruPgRivetSupplyNode): OptionalPromise<S
                     while (get_standard_digital_in(0) == False):
                     if (supply_error_flag7a8337ac == 1):
                         kill air
-                        popup("Check feeder and feedhead.",title="Rivet not supplied.",error=True,blocking=True)
+                        ${popupMessage}
                     end
                     end
                     kill air

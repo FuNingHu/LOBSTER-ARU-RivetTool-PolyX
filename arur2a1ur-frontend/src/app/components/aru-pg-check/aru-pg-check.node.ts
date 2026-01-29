@@ -2,8 +2,8 @@ import { ProgramNode } from '@universal-robots/contribution-api';
 
 export interface AruPgCheckNode extends ProgramNode {
     type: string;
-    parameters?: {
-        [key: string]: unknown;
+    parameters: {
+        language: string;  // Add language parameter
     };
     lockChildren?: boolean;
     allowsChildren?: boolean;
