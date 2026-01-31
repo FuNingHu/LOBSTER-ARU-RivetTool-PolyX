@@ -1,5 +1,5 @@
 
-URCapx implementation based on sdk v0.18.90, tested on PolyScope X v10.11
+URCapx implementation based on sdk v0.19.62, tested on PolyScope X v10.12
 # Angular contribution
 
 This project is a template example of a URCap containing a Web frontend and a Docker backend
