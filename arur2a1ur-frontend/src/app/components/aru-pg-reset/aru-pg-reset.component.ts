@@ -33,7 +33,7 @@ export class AruPgResetComponent implements OnChanges, ProgramPresenter {
             }
 
             if (changes?.robotSettings?.isFirstChange()) {
-                // 先设置默认语言，再使用当前语言
+                // firstly set default language, then use current language
                 this.translateService.setDefaultLang('en');
                 
                 if (changes?.robotSettings?.currentValue) {

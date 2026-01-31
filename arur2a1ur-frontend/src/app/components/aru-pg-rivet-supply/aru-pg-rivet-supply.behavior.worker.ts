@@ -52,13 +52,13 @@ const createProgramNode = (): OptionalPromise<AruPgRivetSupplyNode> => ({
 const generateScriptCodeBefore = (node: AruPgRivetSupplyNode): OptionalPromise<ScriptBuilder> => {
     const builder = new ScriptBuilder();
     
-    // 根据 node.parameters.language 的值选择不同的 popup 消息
+    // In function of node.parameters.language select different popup msg.
     const isJapanese = node.parameters.language === 'ja';
     const popupMessage = isJapanese 
         ? 'popup("フィーダー及びフィードヘッドの動作を確認してください。",title="リベット供給エラー",error=True,blocking=True)'
         : 'popup("Check feeder and feedhead.",title="Rivet not supplied.",error=True,blocking=True)';
     
-    // 使用节点的唯一 threadId 来命名变量和线程
+    // Use the unique threadId to name variables and threads
     const threadId = node.parameters.threadId;
     const flagName = `supply_error_flag_${threadId}`;
     const threadName = `airout_${threadId}`;
@@ -111,7 +111,7 @@ const allowedInsert = (insertionContext: InsertionContext): OptionalPromise<bool
 const nodeUpgrade = (loadedNode: ProgramNode): ProgramNode => {
     const node = loadedNode as AruPgRivetSupplyNode;
     
-    // 为旧节点自动生成 threadId（向后兼容）
+    // For backward compatibility, automatically generate threadId for old nodes
     if (!node.parameters.threadId) {
         node.parameters.threadId = generateThreadId();
     }

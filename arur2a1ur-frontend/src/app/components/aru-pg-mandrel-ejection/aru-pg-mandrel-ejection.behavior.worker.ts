@@ -48,13 +48,13 @@ const createProgramNode = (): OptionalPromise<AruPgMandrelEjectionNode> => ({
 const generateScriptCodeBefore = (node: AruPgMandrelEjectionNode): OptionalPromise<ScriptBuilder> => {
     const builder = new ScriptBuilder();
     
-    // 根据 node.parameters.language 的值选择不同的 popup 消息
+    // In function of node.parameters.language select different popup msg.
     const isJapanese = node.parameters.language === 'ja';
     const popupMessage = isJapanese 
         ? 'popup("バキュームがONとなっているかご確認ください。",title="マンドレル排出エラー",error=True,blocking=True)'
         : 'popup("Check that the vacuum is switched on.",title="Mandrel not ejected.",error=True,blocking=True)';
     
-    // 使用节点的唯一 threadId 来命名变量和线程
+    // Use the unique threadId to name variables and threads
     const threadId = node.parameters.threadId;
     const flagName = `eject_error_flag_${threadId}`;
     const threadName = `maout_${threadId}`;
@@ -101,7 +101,7 @@ const allowedInsert = (insertionContext: InsertionContext): OptionalPromise<bool
 const nodeUpgrade = (loadedNode: ProgramNode): ProgramNode => {
     const node = loadedNode as AruPgMandrelEjectionNode;
     
-    // 为旧节点自动生成 threadId（向后兼容）
+    // For backward compatibility, automatically generate threadId for old nodes
     if (!node.parameters.threadId) {
         node.parameters.threadId = generateThreadId();
     }

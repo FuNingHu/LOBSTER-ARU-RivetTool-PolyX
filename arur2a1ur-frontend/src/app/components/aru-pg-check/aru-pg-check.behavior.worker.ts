@@ -40,7 +40,7 @@ const createProgramNode = (): OptionalPromise<AruPgCheckNode> => ({
 const generateScriptCodeBefore = (node: AruPgCheckNode): OptionalPromise<ScriptBuilder> => {
     const builder = new ScriptBuilder();
     
-    // 根据 node.parameters.language 的值选择不同的 popup 消息
+    // In function of node.parameters.language select different popup msg.
     const isJapanese = node.parameters.language === 'ja';
     
     builder.addStatements('set_standard_digital_out(7,False)');
@@ -48,7 +48,7 @@ const generateScriptCodeBefore = (node: AruPgCheckNode): OptionalPromise<ScriptB
     builder.ifCondition('get_standard_digital_in(1) == False');
     builder.addStatements('set_standard_digital_out(7,True)');
     
-    // 根据语言选择 popup 内容
+    // In function of language select popup content
     if (isJapanese) {
         builder.popup('バキュームがONとなっているかご確認ください。', 'リベットセットエラー', PopupLevel.ERROR, true);
     } else {

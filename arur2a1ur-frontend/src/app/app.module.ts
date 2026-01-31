@@ -48,10 +48,10 @@ export const httpLoaderFactory = (http: HttpBackend) =>
       HttpClientModule,
       TranslateModule.forRoot({
         loader: { provide: TranslateLoader, useFactory: httpLoaderFactory, deps: [HttpBackend] },
-        defaultLanguage: 'en',  // 设置默认 fallback 语言为英语
-        useDefaultLang: true,   // 启用默认语言回退机制
+        defaultLanguage: 'en',  // set fallback language to english
+        useDefaultLang: true,   // start with default language
       }),
-      // 导入 aru-app-* 独立组件
+      // inport aru-app-* standalone components
       AruAppResetComponent,
       AruAppFinishComponent,
       AruAppStartComponent,
