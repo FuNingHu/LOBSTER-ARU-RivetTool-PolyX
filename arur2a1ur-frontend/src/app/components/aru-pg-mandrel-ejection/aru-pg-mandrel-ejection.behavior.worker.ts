@@ -12,6 +12,13 @@ import {
 } from '@universal-robots/contribution-api';
 import { AruPgMandrelEjectionNode } from './aru-pg-mandrel-ejection.node';
 
+// Generate a unique UUID for thread naming
+function generateThreadId(): string {
+    return 'xxxxxxxx'.replace(/x/g, () => {
+        return Math.floor(Math.random() * 16).toString(16);
+    });
+}
+
 // programNodeLabel is required
 const createProgramNodeLabel = (node: AruPgMandrelEjectionNode): OptionalPromise<TranslatedProgramLabelPart[]> => {
     const extensionPart: TranslatedProgramLabelPart = {
@@ -32,7 +39,8 @@ const createProgramNode = (): OptionalPromise<AruPgMandrelEjectionNode> => ({
     allowsChildren: false,
     parameters: {
         check_time: 3,
-        language: 'en'  // Default language
+        language: 'en',  // Default language
+        threadId: generateThreadId()  // Generate unique thread ID for this node instance
     },
 });
 
@@ -46,23 +54,29 @@ const generateScriptCodeBefore = (node: AruPgMandrelEjectionNode): OptionalPromi
         ? 'popup("バキュームがONとなっているかご確認ください。",title="マンドレル排出エラー",error=True,blocking=True)'
         : 'popup("Check that the vacuum is switched on.",title="Mandrel not ejected.",error=True,blocking=True)';
     
-    builder.addRaw(`eject_error_flag = 0
-                    thread maouta084d066():
+    // 使用节点的唯一 threadId 来命名变量和线程
+    const threadId = node.parameters.threadId;
+    const flagName = `eject_error_flag_${threadId}`;
+    const threadName = `maout_${threadId}`;
+    const threadHandle = `ma_${threadId}`;
+    
+    builder.addRaw(`${flagName} = 0
+                    thread ${threadName}():
                         set_tool_digital_out(0,False)
                         sleep(${node.parameters.check_time})
                         set_standard_digital_out(7,True)
-                        eject_error_flag = 1
+                        ${flagName} = 1
                         return False
                     end
-                    ma = run maouta084d066()
+                    ${threadHandle} = run ${threadName}()
                     while (get_standard_digital_in(2) == False):
-                        if (eject_error_flag == 1):
-                            kill ma
+                        if (${flagName} == 1):
+                            kill ${threadHandle}
                             ${popupMessage}
                         end
                         sync()
                     end
-                    kill ma`);
+                    kill ${threadHandle}`);
     return builder;
 };
 
@@ -84,7 +98,16 @@ const allowChildInsert = (node: ProgramNode, childType: string): OptionalPromise
 const allowedInsert = (insertionContext: InsertionContext): OptionalPromise<boolean> => true;
 
 // upgradeNode is optional
-const nodeUpgrade = (loadedNode: ProgramNode): ProgramNode => loadedNode;
+const nodeUpgrade = (loadedNode: ProgramNode): ProgramNode => {
+    const node = loadedNode as AruPgMandrelEjectionNode;
+    
+    // 为旧节点自动生成 threadId（向后兼容）
+    if (!node.parameters.threadId) {
+        node.parameters.threadId = generateThreadId();
+    }
+    
+    return node;
+};
 
 const behaviors: ProgramBehaviors = {
     programNodeLabel: createProgramNodeLabel,

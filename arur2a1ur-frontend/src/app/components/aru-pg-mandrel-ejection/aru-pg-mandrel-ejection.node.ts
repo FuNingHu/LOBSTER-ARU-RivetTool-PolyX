@@ -5,6 +5,7 @@ export interface AruPgMandrelEjectionNode extends ProgramNode {
     parameters: {
         check_time: number;
         language: string;  // Add language parameter
+        threadId: string;  // Unique thread identifier for this node instance
     };
     lockChildren?: boolean;
     allowsChildren?: boolean;

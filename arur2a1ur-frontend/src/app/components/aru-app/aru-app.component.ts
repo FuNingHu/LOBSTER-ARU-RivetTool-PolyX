@@ -34,10 +34,12 @@ export class AruAppComponent implements ApplicationPresenter, OnChanges {
             }
 
             if (changes?.robotSettings?.isFirstChange()) {
+                // 先设置默认语言，再使用当前语言
+                this.translateService.setDefaultLang('en');
+                
                 if (changes?.robotSettings?.currentValue) {
                     this.translateService.use(changes?.robotSettings?.currentValue?.language);
                 }
-                this.translateService.setDefaultLang('en');
             }
 
             this.translateService

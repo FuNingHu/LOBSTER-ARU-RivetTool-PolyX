@@ -37,10 +37,12 @@ export class AruPgMandrelEjectionComponent implements OnChanges, OnDestroy, Prog
             }
 
             if (changes?.robotSettings?.isFirstChange()) {
+                // 先设置默认语言，再使用当前语言
+                this.translateService.setDefaultLang('en');
+                
                 if (changes?.robotSettings?.currentValue) {
                     this.translateService.use(changes?.robotSettings?.currentValue?.language);
                 }
-                this.translateService.setDefaultLang('en');
                 
                 // Subscribe to language changes to always keep node language updated
                 this.setupLanguageSubscription();
@@ -53,7 +55,7 @@ export class AruPgMandrelEjectionComponent implements OnChanges, OnDestroy, Prog
                     this.cd.detectChanges();
                 });
             
-            // Save language to node parameters whenever it changes
+            // Save language to node parameters
             this.updateNodeLanguage(changes?.robotSettings?.currentValue?.language);
         }
         
