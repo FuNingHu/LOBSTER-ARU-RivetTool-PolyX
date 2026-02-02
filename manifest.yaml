@@ -1,9 +1,13 @@
 metadata:
   vendorID: "lobtex"
-  urcapID: "ar-ur-2a1-ur"
   vendorName: "Lobtex"
+  urcapID: "ar-ur-2a1-ur"
   urcapName: "ARU-R2A1-UR"
   version: 1.1.0
+  contactInfo: "https://www.lobtex.com"
+  description: "ARU-R2A1-UR is a URCap that allows the user to control the ARU-R2A1-UR Rivet Tool."
+  copyright: "Copyright (c) 2026 Lobtex. All rights reserved."
+  licenseType: "MIT"
 artifacts:
   webArchives:
   - id: "arur2a1ur-frontend"
