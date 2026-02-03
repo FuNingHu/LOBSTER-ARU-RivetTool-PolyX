@@ -6,8 +6,8 @@
         "supportiveText": "URCap紹介",
         "tabs": {
           "reset": "ARUリセット",
-          "finish": "リベット完了",
-          "start": "リベット開始",
+          "finish": "かしめ終了",
+          "start": "かしめ開始",
           "mandrel": "マンドレル排出",
           "supply": "リベット供給",
           "check": "リベット検知"
@@ -21,78 +21,78 @@
           }
         },
         "finish": {
-          "title": "リベット完了",
-          "description": "リベット作業を完了します。",
+          "title": "かしめ終了",
+          "description": "リベッターのかしめ動作を終了します。",
           "ioConfig": {
-            "title": "I/Oポート設定",
-            "to0": "ツールデジタル出力ポートはOFFです"
+            "title": "I/Oポートの動作",
+            "to0": "ツールデジタル出力ポートTO[0]をLOWにします。"
           }
         },
         "start": {
-          "title": "リベット開始",
-          "description": "リベット作業を開始します。",
+          "title": "かしめ開始",
+          "description": "リベッターのかしめ動作を開始します。本ノード実行前にリベッティング位置に移動してください。",
           "note": {
             "label": "注意:",
-            "text": "リベット終了後はマンドレルを排出してください。"
+            "text": "本ノード実行後は[マンドレル排出]ノードを必ず実行してください。"
           },
           "ioConfig": {
-            "title": "I/Oポート設定",
-            "to0": "ツールデジタル出力ポートは ON です"
+            "title": "I/Oポートの動作",
+            "to0": "ツールデジタル出力ポートTO[0]をHIGHにします。"
           },
           "parameters": {
-            "title": "調整可能なパラメータ",
-            "description": "リベットスイッチのON時間を調整するスライダーがあります。"
+            "title": "調整パラメーター",
+            "description": "かしめ時間をスライダーで調整します。"
           }
         },
         "mandrel": {
           "title": "マンドレル排出",
-          "description": "リベット作業を完了し、マンドレルが排出されたかどうかを確認します。",
+          "description": "リベッターのかしめ動作を終了して、マンドレルの排出を通過センサーで検知します。",
           "ioConfig": {
-            "title": "I/Oポート設定",
-            "to0": "ツールデジタル出力ポートは OFF です",
-            "do7": "エラー出力ポート",
+            "title": "I/Oポートの動作と設定",
+            "to0": "ツールデジタル出力ポートTO[0]をLOWにします。",
+            "do7": "異常出力ポート",
             "di2": "マンドレル通過センサー入力ポート"
           },
           "parameters": {
-            "title": "調整可能なパラメータ",
-            "description": "マンドレル排出のチェック時間を調整するスライダーがあります。"
+            "title": "調整パラメーター",
+            "description": "マンドレルを排出開始してから不通過でエラーと判断するまでの時間をスライダーで調整します。"
           }
         },
         "supply": {
           "title": "リベット供給",
-          "description": "ARF-700からフィードヘッドユニットへリベットを加圧供給します。",
+          "description": "ARF-700Fからフィードヘッドユニットへリベットを圧送します。",
           "note": {
             "label": "注意:",
-            "text": "真空スイッチをONにしてください。このノードの前に供給ポイントへ移動してください。"
+            "text": "本ノード実行前にバキュームをONにして、供給地点へ移動してください。"
           },
           "ioConfig": {
             "title": "I/Oポート設定",
             "do0": "リベット供給要求出力ポート",
-            "do1": "フィンガー開閉操作出力ポート (HIGH: フィンガー閉)",
-            "do7": "エラー出力ポート",
+            "do1": "フィンガー開閉動作出力ポート (HIGH: フィンガー閉)",
+            "do7": "異常出力ポート",
             "di0": "リベット通過センサー入力ポート"
           },
           "parameters": {
-            "title": "調整可能なパラメータ",
-            "description": "以下のタイミングパラメータを調整する3つのスライダーがあります：",
+            "title": "調整パラメーター",
+            "description": "以下の3つのパラメータをスライダーにて調整します。：",
             "items": {
-              "check": "リベット供給チェック時間",
-              "open": "フィンガーを開く時間",
-              "stop": "エア停止までの時間"
+              "check": "リベット通過判定最大時間（デフォルト設定値3[sec]、設定可能範囲0～10[sec]、1[sec]刻み）",
+              "open": "フィンガー閉じ時間（デフォルト設定値0.2[sec]、設定可能範囲0～0.99[sec]、0.01[sec]刻み）",
+              "stop": "圧送停止遅延時間（デフォルト設定値0[sec]、設定可能範囲0～0.99[sec]、0.01[sec]刻み）"
             }
           }
         },
         "check": {
           "title": "リベット検知",
-          "description": "光学センサーでリベットをチェックします。",
+          "description": "リベットの有無を光電センサーで検知します。",
           "note": {
             "label": "注意:",
-            "text": "このノードの前にチェックポイントへ移動してください。"
+            "text": "本ノード実行前に検知地点へ移動してください。"
           },
           "ioConfig": {
             "title": "I/O ポート設定",
-            "di1": "光学センサー入力ポート",
-            "do7": "エラー出力ポート (リベット未セット時、このポートは ON)"
+            "di1": "光電センサー入力ポート",
+            "do7": "異常出力ポート (リベット未セット時、このポートは HIGH)"
           }
         }
       }
@@ -102,8 +102,8 @@
     "tree": {
       "nodes": {
         "lobtex-arur2a1ur-aru-pg-reset": "ARUリセット",
-        "lobtex-arur2a1ur-aru-pg-finish": "リベット完了",
-        "lobtex-arur2a1ur-aru-pg-riveting-start": "リベット開始",
+        "lobtex-arur2a1ur-aru-pg-finish": "かしめ終了",
+        "lobtex-arur2a1ur-aru-pg-riveting-start": "かしめ開始",
         "lobtex-arur2a1ur-aru-pg-mandrel-ejection": "マンドレル排出",
         "lobtex-arur2a1ur-aru-pg-rivet-supply": "リベット供給",
         "lobtex-arur2a1ur-aru-pg-check": "リベット検知"
@@ -119,12 +119,12 @@
       "aru-pg-riveting-start": {
         "label": "リベット開始: かしめ時間",
         "unit": "秒",
-        "programLabel": "スイッチオン {{duration}} 秒"
+        "programLabel": "かしめ時間 {{duration}} 秒"
       },
       "aru-pg-mandrel-ejection": {
         "label": "マンドレル排出: 排出チェック時間",
         "unit": "秒",
-        "programLabel": "マンドレル排出後 {{checkTime}} 秒でチェック"
+        "programLabel": "マンドレル排出後 {{checkTime}} 秒間チェック"
       },
       "aru-pg-rivet-supply": {
         "title": "リベット供給:",
@@ -132,7 +132,7 @@
         "timeToOpen": "閉じ時間",
         "timeToStop": "圧送停止遅延時間",
         "unit": "秒",
-        "programLabel": "チェック時間 {{time2Check}} 秒、開く時間 {{time2Open}} 秒、停止時間 {{time2Stop}} 秒"
+        "programLabel": "通過判定最大時間 {{time2Check}} 秒、閉じ時間 {{time2Open}} 秒、圧送停止遅延時間 {{time2Stop}} 秒"
       },
       "aru-pg-check": {
         "description": "光電センサーでリベットをチェックします。",

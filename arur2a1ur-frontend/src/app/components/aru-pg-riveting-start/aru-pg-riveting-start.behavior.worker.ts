@@ -14,6 +14,7 @@ import { AruPgRivetingStartNode } from './aru-pg-riveting-start.node';
 
 // programNodeLabel is required
 const createProgramNodeLabel = (node: AruPgRivetingStartNode): OptionalPromise<TranslatedProgramLabelPart[]> => {
+    
     const extensionPart: TranslatedProgramLabelPart = {
         type: 'secondary',
         translationKey: 'program.nodes.aru-pg-riveting-start.programLabel',
@@ -21,6 +22,7 @@ const createProgramNodeLabel = (node: AruPgRivetingStartNode): OptionalPromise<T
             duration: node.parameters.duration.toString()
         },
     };
+    
     return [extensionPart];
 };
 

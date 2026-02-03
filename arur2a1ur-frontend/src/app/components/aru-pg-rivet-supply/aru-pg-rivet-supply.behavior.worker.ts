@@ -21,6 +21,7 @@ function generateThreadId(): string {
 
 // programNodeLabel is required
 const createProgramNodeLabel = (node: AruPgRivetSupplyNode): OptionalPromise<TranslatedProgramLabelPart[]> => {
+    
     const extensionPart: TranslatedProgramLabelPart = {
         type: 'secondary',
         translationKey: 'program.nodes.aru-pg-rivet-supply.programLabel',
@@ -30,6 +31,7 @@ const createProgramNodeLabel = (node: AruPgRivetSupplyNode): OptionalPromise<Tra
             time2Stop: node.parameters.time2Stop.toString()
         },
     };
+    
     return [extensionPart];
 };
 

@@ -21,6 +21,7 @@ function generateThreadId(): string {
 
 // programNodeLabel is required
 const createProgramNodeLabel = (node: AruPgMandrelEjectionNode): OptionalPromise<TranslatedProgramLabelPart[]> => {
+    
     const extensionPart: TranslatedProgramLabelPart = {
         type: 'secondary',
         translationKey: 'program.nodes.aru-pg-mandrel-ejection.programLabel',
@@ -28,6 +29,7 @@ const createProgramNodeLabel = (node: AruPgMandrelEjectionNode): OptionalPromise
             checkTime: node.parameters.check_time.toString()
         },
     };
+    
     return [extensionPart];
 };
 
