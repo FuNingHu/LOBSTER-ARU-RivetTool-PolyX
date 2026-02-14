@@ -88,10 +88,10 @@ export class AruPgRivetSupplyComponent implements OnChanges, OnDestroy, ProgramP
         });
     }
     
-    private updateNodeLanguage(language: string): void {
+    private async updateNodeLanguage(language: string): Promise<void> {
         if (this.contributedNode && language && this.contributedNode.parameters.language !== language) {
             this.contributedNode.parameters.language = language;
-            this.saveNode();
+            await this.saveNode();
         }
     }
     

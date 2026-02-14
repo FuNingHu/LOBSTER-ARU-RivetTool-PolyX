@@ -3,6 +3,7 @@ import {
     InsertionContext,
     OptionalPromise,
     PopupLevel,
+    ProgramBehaviorAPI,
     ProgramBehaviors,
     ProgramNode,
     registerProgramBehavior,
@@ -37,11 +38,14 @@ const createProgramNode = (): OptionalPromise<AruPgCheckNode> => ({
 });
 
 // generateCodeBeforeChildren is optional
-const generateScriptCodeBefore = (node: AruPgCheckNode): OptionalPromise<ScriptBuilder> => {
+const generateScriptCodeBefore = async (node: AruPgCheckNode): Promise<ScriptBuilder> => {
     const builder = new ScriptBuilder();
     
-    // In function of node.parameters.language select different popup msg.
-    const isJapanese = node.parameters.language === 'ja';
+    // Get robot settings from API
+    const api = new ProgramBehaviorAPI(self);
+    
+    // Use system language if node language is not set
+    const language = (await api.settingsService.getRobotSettingsOnce()).language;
     
     builder.addStatements('set_standard_digital_out(7,False)');
     builder.addStatements('set_standard_digital_out(1,True)');
@@ -49,9 +53,9 @@ const generateScriptCodeBefore = (node: AruPgCheckNode): OptionalPromise<ScriptB
     builder.addStatements('set_standard_digital_out(7,True)');
     
     // In function of language select popup content
-    if (isJapanese) {
+    if (language === 'ja') {
         builder.popup('バキュームがONとなっているかご確認ください。', 'リベットセットエラー', PopupLevel.ERROR, true);
-    } else {
+    } else { // default language is English
         builder.popup('Check the vacuum is switched on.', 'Rivet is not set', PopupLevel.ERROR, true);
     }
     

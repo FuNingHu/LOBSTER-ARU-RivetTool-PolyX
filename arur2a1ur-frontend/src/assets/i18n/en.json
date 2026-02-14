@@ -101,7 +101,7 @@
   "program": {
     "tree": {
       "nodes": {
-        "lobtex-arur2a1ur-aru-pg-reset": "ARU Reset111",
+        "lobtex-arur2a1ur-aru-pg-reset": "ARU Reset",
         "lobtex-arur2a1ur-aru-pg-finish": "Riveting Finish",
         "lobtex-arur2a1ur-aru-pg-riveting-start": "Riveting Start",
         "lobtex-arur2a1ur-aru-pg-mandrel-ejection": "Mandrel Ejection",

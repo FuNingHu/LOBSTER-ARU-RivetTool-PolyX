@@ -2,6 +2,7 @@
 import {
     InsertionContext,
     OptionalPromise,
+    ProgramBehaviorAPI,
     ProgramBehaviors,
     ProgramNode,
     registerProgramBehavior,
@@ -47,12 +48,16 @@ const createProgramNode = (): OptionalPromise<AruPgMandrelEjectionNode> => ({
 });
 
 // generateCodeBeforeChildren is optional
-const generateScriptCodeBefore = (node: AruPgMandrelEjectionNode): OptionalPromise<ScriptBuilder> => {
+const generateScriptCodeBefore = async (node: AruPgMandrelEjectionNode): Promise<ScriptBuilder> => {
     const builder = new ScriptBuilder();
     
-    // In function of node.parameters.language select different popup msg.
-    const isJapanese = node.parameters.language === 'ja';
-    const popupMessage = isJapanese 
+    // Get robot settings from API
+    const api = new ProgramBehaviorAPI(self);
+    
+    // Use system language if node language is not set
+    const language = (await api.settingsService.getRobotSettingsOnce()).language;
+    
+    const popupMessage = (language === 'ja') 
         ? 'popup("バキュームがONとなっているかご確認ください。",title="マンドレル排出エラー",error=True,blocking=True)'
         : 'popup("Check that the vacuum is switched on.",title="Mandrel not ejected.",error=True,blocking=True)';
     

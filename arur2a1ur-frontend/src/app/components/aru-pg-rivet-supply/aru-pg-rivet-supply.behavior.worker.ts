@@ -2,6 +2,7 @@
 import {
     InsertionContext,
     OptionalPromise,
+    ProgramBehaviorAPI,
     ProgramBehaviors,
     ProgramNode,
     registerProgramBehavior,
@@ -51,14 +52,20 @@ const createProgramNode = (): OptionalPromise<AruPgRivetSupplyNode> => ({
 });
 
 // generateCodeBeforeChildren is optional
-const generateScriptCodeBefore = (node: AruPgRivetSupplyNode): OptionalPromise<ScriptBuilder> => {
+const generateScriptCodeBefore = async (node: AruPgRivetSupplyNode): Promise<ScriptBuilder> => {
     const builder = new ScriptBuilder();
     
+    // Get robot settings from API
+    const api = new ProgramBehaviorAPI(self);
+    
+    // Use system language if node language is not set
+    const language = (await api.settingsService.getRobotSettingsOnce()).language;
+    
     // In function of node.parameters.language select different popup msg.
-    const isJapanese = node.parameters.language === 'ja';
-    const popupMessage = isJapanese 
+    const popupMessage = (language === 'ja') 
         ? 'popup("フィーダー及びフィードヘッドの動作を確認してください。",title="リベット供給エラー",error=True,blocking=True)'
         : 'popup("Check feeder and feedhead.",title="Rivet not supplied.",error=True,blocking=True)';
+    
     
     // Use the unique threadId to name variables and threads
     const threadId = node.parameters.threadId;
